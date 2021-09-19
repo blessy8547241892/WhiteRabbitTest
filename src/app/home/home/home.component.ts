@@ -1,23 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { HomeService } from './home.service';
-export interface Data {
-  userId: string;
-  Id: number;
-  title: number;
-  completed: boolean;
-}
-
-const ELEMENT_DATA: Data[] = [
-];
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'userId', 'title', 'completed'];
-  
-  dataSource : any = [];
+  displayedColumns: string[] = ['Name', 'Email', 'Phone','Gender', 'DOB'];
+  searchText: string;
+  users : any;
+  userData: any;
   constructor(private homeService: HomeService,) { }
 
   ngOnInit(): void {
@@ -25,8 +17,8 @@ export class HomeComponent implements OnInit {
       console.log(data);
       localStorage.setItem('UsersList', JSON.stringify(data['results']))
     });
-    let userData = localStorage.getItem('UsersList');
-    this.dataSource = JSON.stringify(userData);
+    this.userData = localStorage.getItem('UsersList');
+    this.users = JSON.parse(this.userData);
   }
 }
 

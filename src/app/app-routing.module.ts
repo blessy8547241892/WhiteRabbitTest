@@ -5,9 +5,9 @@ import { LoginComponent } from './login/login/login.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
-  { path: 'home', component: HomeComponent },
+  { path: 'home', component: HomeComponent}
+  // loadChildren: './home/home.module#HomeModule'}
 ];
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

@@ -1,33 +1,28 @@
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
-    <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
-  
-  
-    <!-- Weight Column -->
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef> id </th>
-      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-    </ng-container>
-  
-    <!-- Position Column -->
-    <ng-container matColumnDef="userId">
-      <th mat-header-cell *matHeaderCellDef> userId. </th>
-      <td mat-cell *matCellDef="let element"> {{element.userId}} </td>
-    </ng-container>
-  
-   <!-- Name Column -->
-    <ng-container matColumnDef="title">
-      <th mat-header-cell *matHeaderCellDef> title </th>
-      <td mat-cell *matCellDef="let element"> {{element.title}} </td>
-    </ng-container>
-  
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="completed">
-      <th mat-header-cell *matHeaderCellDef> completed </th>
-      <td mat-cell *matCellDef="let element"> {{element.completed}} </td>
-    </ng-container>
-  
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+<h4>Users List</h4>
+<hr>
+<div class="form-group mb-4">
+  <input class="form-control" type="text" [(ngModel)]="searchText" placeholder="Search">
+</div>
+<table id="customers" *ngIf="(users | filter: searchText).length > 0; else noResults">
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th colspan="2">Phone</th>
+    <th>Gender</th>
+    <th>DOB</th>
+  </tr>
+  <tr *ngFor="let user of users | filter: searchText;">
+    <td>{{user.user.name.first}}</td>
+    <td>{{user.user.email}}</td>
+    <td colspan="2">{{user.user.phone}}</td>
+    <td>{{user.user.gender}}</td>
+    <td>{{user.user.dob}}</td>
+  </tr>
+</table>
+<ng-template #noResults>
+  <p>No results found for "{{searchText}}".</p>
+</ng-template>
+<br>
+<h4>Create User</h4>
+<hr>
+<app-user></app-user>
